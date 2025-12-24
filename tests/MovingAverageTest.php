@@ -14,7 +14,7 @@ class MovingAverageTest extends TestCase
     {
         $ma1 = new MovingAverage();
 
-        $this->assertInstanceOf(MovingAverage::class, $ma1);
+        self::assertInstanceOf(MovingAverage::class, $ma1);
     }
 
     /**
@@ -39,8 +39,8 @@ class MovingAverageTest extends TestCase
 
         foreach ([1, 2, 3, 4, 5] as $i => $value) {
             [$average, $key] = ($mavg->calculateNext($value, $i) ?? [0.0, '']);
-            $this->assertEquals($value, $average);
-            $this->assertEquals($i, $key);
+            self::assertEquals($value, $average);
+            self::assertEquals($i, $key);
         }
     }
 
@@ -59,7 +59,7 @@ class MovingAverageTest extends TestCase
 
         $averages = $mavg->getCalculatedFromArray($sources);
 
-        $this->assertEquals($results, $averages);
+        self::assertEquals($results, $averages);
     }
 
     /**
@@ -76,7 +76,8 @@ class MovingAverageTest extends TestCase
             ->setDelay($delay);
 
         foreach ($mavg->generateFromArray($sources) as $key => $value) {
-            $this->assertEquals($results[$key], $value);
+            /** @var string $key */
+            self::assertEquals($results[$key], $value);
         }
     }
 
@@ -97,7 +98,7 @@ class MovingAverageTest extends TestCase
 
         $averages = $mavg->getCalculatedFromGenerator($generator);
 
-        $this->assertEquals($results, $averages);
+        self::assertEquals($results, $averages);
     }
 
     /**
@@ -116,7 +117,8 @@ class MovingAverageTest extends TestCase
         $generator = $this->asGenerator($sources);
 
         foreach ($mavg->generateFromGenerator($generator) as $key => $value) {
-            $this->assertEquals($results[$key], $value);
+            /** @var string $key */
+            self::assertEquals($results[$key], $value);
         }
     }
 
@@ -218,7 +220,7 @@ class MovingAverageTest extends TestCase
 
         $averages = $mavg->getCalculatedFromArray($sources);
 
-        $this->assertEquals($results, $averages);
+        self::assertEquals($results, $averages);
     }
 
     /**
@@ -237,7 +239,8 @@ class MovingAverageTest extends TestCase
             ->setWeights($weights);
 
         foreach ($mavg->generateFromArray($sources) as $key => $value) {
-            $this->assertEquals($results[$key], $value);
+            /** @var string $key */
+            self::assertEquals($results[$key], $value);
         }
     }
 
@@ -260,7 +263,7 @@ class MovingAverageTest extends TestCase
 
         $averages = $mavg->getCalculatedFromGenerator($generator);
 
-        $this->assertEquals($results, $averages);
+        self::assertEquals($results, $averages);
     }
 
     /**
@@ -281,7 +284,8 @@ class MovingAverageTest extends TestCase
         $generator = $this->asGenerator($sources);
 
         foreach ($mavg->generateFromGenerator($generator) as $key => $value) {
-            $this->assertEquals($results[$key], $value);
+            /** @var string $key */
+            self::assertEquals($results[$key], $value);
         }
     }
 

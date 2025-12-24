@@ -80,7 +80,7 @@ class MovingAverage
             null,
             self::ARITHMETIC,
             self::WEIGHTED_ARITHMETIC,
-        ])) {
+        ], true)) {
             throw new InvalidArgumentException('invalid_method');
         }
 
@@ -132,7 +132,7 @@ class MovingAverage
         return $this->period >= 1
             && $this->delay >= 0
             && $this->delay <= $this->period
-            && \count($this->weights) == $this->period;
+            && \count($this->weights) === $this->period;
     }
 
     /**
@@ -167,7 +167,7 @@ class MovingAverage
     {
         $this->period = $period;
 
-        if (empty($this->weights)) {
+        if (count($this->weights) === 0) {
             $this->setDefaultWeightsForPeriod(1);
         }
 
@@ -271,9 +271,9 @@ class MovingAverage
      */
     protected function calculateSimpleAverage(): float
     {
-        $denominator =  count_values($this->set);
+        $denominator = count_values($this->set);
 
-        if ($denominator == 0) {
+        if ($denominator === 0) {
             throw new DivisionByZeroError('empty_set');
         }
 
@@ -300,7 +300,7 @@ class MovingAverage
             $weights
         ));
 
-        if ($denominator == 0) {
+        if ($denominator === 0) {
             throw new DivisionByZeroError('empty_set');
         }
 
