@@ -62,7 +62,7 @@ class MovingAverage
     /**
      * @param int $method A method constant
      */
-    public function __construct(int $method = null)
+    public function __construct(?int $method = null)
     {
         $this->setMethod($method);
 
